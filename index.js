@@ -4,8 +4,8 @@ class Grid {
       .appendChild(this.styleElement = document.createElement('style'))
     
     this.grid = [
-      [1, 2],
-      [1, 2],
+      [0, 0],
+      [0, 0],
     ];
 
     this.render();
