@@ -8,35 +8,10 @@
   <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-  <script>
-    const areaOfTriangle = ([x1,y1], [x2,y2], [x3,y3]) => Math.abs(x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2)) / 2
-        , pointIsInsideTriangle = ([[x1,y1], [x2,y2], [x3,y3]], [x,y]) => {
-          const A = areaOfTriangle([x1,y1], [x2,y2], [x3,y3])
-              , A1 = areaOfTriangle([x,y], [x2,y2], [x3,y3])
-              , A2 = areaOfTriangle([x1,y1], [x,y], [x3,y3])
-              , A3 = areaOfTriangle([x1,y1], [x2,y2], [x,y])
-          
-            return A === (A1 + A2 + A3)
-          }
-        , divideRectangleIntoTriangles = ({ width, height }) => [
-            ['top', [[0,0], [width/2,height/2], [width,0]]],
-            ['right', [[width,0], [width/2,height/2], [width,height]]],
-            ['bottom', [[width,height], [width/2,height/2], [0,height]]],
-            ['left', [[0,height], [width/2,height/2], [0,0]]],
-          ]
-        , getTriangleInWhichPointLies = (rectangle, point) => {
-            const [side] = divideRectangleIntoTriangles(rectangle)
-              .find(([side, triangle]) => pointIsInsideTriangle(triangle, point))
-            return side
-          }
-
-    const dragover = ({ target, offsetX, offsetY }) => {
-      target.classList.remove('left', 'top', 'right', 'bottom')
-      target.classList.add(getTriangleInWhichPointLies(target.getBoundingClientRect(), [offsetX, offsetY]))
-    }
-  </script>
   <main class="grid">
-    <section style="--pane-id: pane-0" draggable="true" ondragover="dragover(event)" ondragleave="event.target.classList.remove('top', 'right', 'bottom', 'left')"></section>
+    <section style="--pane-id: pane-0" draggable="true" ondragenter="grid.dragEnter(event)" ondragover="grid.dragOver(event)" ondragleave="grid.dragLeave(event)">
+      
+    </section>
   </main>
   <script src="./index.js"></script>
 </body>
