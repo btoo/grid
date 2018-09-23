@@ -7,11 +7,6 @@ class Grid {
       [1, 2],
       [1, 2],
     ];
-    // this.styleElement.appendChild(document.createTextNode(`
-    //   main {
-    //     // background: green;
-    //   }
-    // `))
 
     this.render();
   }
